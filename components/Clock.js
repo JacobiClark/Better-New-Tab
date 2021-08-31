@@ -14,7 +14,7 @@ const Clock = () => {
   return (
     <Box>
       <Center>
-        <Text>{time}</Text>
+        <Text fontSize="3xl">{time}</Text>
       </Center>
     </Box>
   );

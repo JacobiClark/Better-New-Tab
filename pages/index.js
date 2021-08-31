@@ -5,21 +5,12 @@ import Clock from "../components/Clock";
 import { Box, Text } from "@chakra-ui/react";
 import LinkCard from "../components/LinkCard";
 import { FaSearch, FaStackOverflow } from "react-icons/fa";
+import { websites } from "../utils/websites";
 
 export default function Home() {
-  const websites = [
-    {
-      websiteName: "Google Search",
-      url: "https://www.google.com",
-      icon: <FaStackOverflow className={styles.icon} />,
-    },
-    /*{ websiteName: "Stack Overflow", url: "https://www.stackoverflow.com" },
-    { websiteName: "GitHub", url: "https://www.github.com" },
-    { websiteName: "Reddit", url: "https://www.reddit.com" },
-    { websiteName: "Twitter", url: "https://www.twitter.com" },*/
-  ];
+  console.log(websites);
   return (
-    <Box m="2%">
+    <Box ml="2%" mr="2%">
       <Head>
         <title>Better New Tab</title>
         <meta
@@ -28,7 +19,6 @@ export default function Home() {
         />
         <link rel="icon" href="/cube.ico" />
       </Head>
-      <FaStackOverflow className={styles.icon} />
       <Clock />
       {websites.map((website) => (
         <LinkCard

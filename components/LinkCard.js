@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import styles from "../styles/Home.module.css";
-
+import { buildSearchQuery } from "../utils/helpers";
 import Link from "next/link";
 import {
   Box,
@@ -11,40 +10,45 @@ import {
   Input,
   InputRightElement,
   InputGroup,
+  Form,
 } from "@chakra-ui/react";
 import { FaSearch, FaStackOverflow } from "react-icons/fa";
 
 const LinkCard = (props) => {
   const [searchInput, setSearchInput] = useState("");
-  const handleChange = (event) => {
-    setSearchInput(event.target.value);
+
+  const handleChange = (e) => {
+    setSearchInput(e.target.value);
   };
+
   const handleClick = (e) => {
     e.preventDefault();
-    location.assign("http://www.mozilla.org");
+    location.assign(buildSearchQuery(props.websiteName, searchInput));
   };
+
   return (
-    <Flex borderWidth="1px" borderRadius="lg" alignItems="center">
-      {props.icon}
-      <Box>{props.websiteName}</Box>
+    <Flex alignItems="center" mt="5px">
+      <Link href={props.url}>
+        <a>{props.icon}</a>
+      </Link>
+
       <InputGroup>
         <Input
           placeholder={"Search " + props.websiteName}
           onChange={handleChange}
-          onSubmit={() => console.log("hi")}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              location.assign(buildSearchQuery(props.websiteName, searchInput));
+            }
+          }}
           flexGrow="1"
-          m="2%"
+          m="1%"
         />
-        <Link href={props.url} passHref={true}>
-          <a>
-            <InputRightElement m="2%">
-              <Button onClick={handleClick}>
-                <FaSearch />
-              </Button>
-            </InputRightElement>
-          </a>
-        </Link>
       </InputGroup>
+
+      <Button onClick={handleClick} mr="1%">
+        <FaSearch />
+      </Button>
     </Flex>
   );
 };
